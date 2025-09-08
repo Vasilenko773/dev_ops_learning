@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Ensure Apache is started
+      systemd:
+        name: apache2
+        enabled: yes
+        state: started
+
+    - name: Create HTML page
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          <html>
+            <body>
+              <h1>Hello from LAMP</h1>
+              <img src="https://{{ yandex_bucket_name }}.storage.yandexcloud.net/{{ yandex_image_name }}" />
+            </body>
+          </html>
