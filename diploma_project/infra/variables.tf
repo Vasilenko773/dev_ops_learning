@@ -54,3 +54,9 @@ variable "ssh_user" {
   default     = "green773"
   description = "имя учетной записи"
 }
+
+variable "terraform_sa_id" {
+  type = string
+  default = ""
+  description = "идентификатор сервисного аккаунта"
+}
