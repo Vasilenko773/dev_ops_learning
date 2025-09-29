@@ -44,3 +44,15 @@ module "state-bucket" {
   folder_id    = var.folder_id
   network_zone = var.network_zone
 }
+
+module "vpc" {
+  source    = "./modules/vpc"
+  cloud_id  = var.cloud_id
+  folder_id = var.folder_id
+
+  network_name = "my-vpc"
+  subnets = [
+    { name = "subnet-a", zone = "ru-central1-a", cidr = "10.0.1.0/24" },
+    { name = "subnet-b", zone = "ru-central1-b", cidr = "10.0.2.0/24" },
+  ]
+}
