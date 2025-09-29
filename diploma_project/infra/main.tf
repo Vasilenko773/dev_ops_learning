@@ -23,6 +23,7 @@ terraform {
 }
 
 provider "yandex" {
+  #  yc iam key create --service-account-id ajelfem283dkeeqrupo5 --output ../sa-key.json - команда для ключей сервисного аккаунта
   service_account_key_file = "${path.module}/../sa-key.json"
   cloud_id                 = var.cloud_id
   folder_id                = var.folder_id
@@ -30,16 +31,16 @@ provider "yandex" {
 }
 
 
-#module "service_account" {
-#  source       = "./modules/service-account"
-#  cloud_id     = var.cloud_id
-#  folder_id    = var.folder_id
-#  network_zone = var.network_zone
-#}
+module "service_account" {
+  source       = "./modules/service-account"
+  cloud_id     = var.cloud_id
+  folder_id    = var.folder_id
+  network_zone = var.network_zone
+}
 
-#module "state-bucket" {
-#  source       = "./modules/state-bucket"
-#  cloud_id     = var.cloud_id
-#  folder_id    = var.folder_id
-#  network_zone = var.network_zone
-#}
+module "state-bucket" {
+  source       = "./modules/state-bucket"
+  cloud_id     = var.cloud_id
+  folder_id    = var.folder_id
+  network_zone = var.network_zone
+}
