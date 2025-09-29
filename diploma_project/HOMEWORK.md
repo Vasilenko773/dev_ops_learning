@@ -40,8 +40,14 @@
 2. Подготовьте [backend](https://developer.hashicorp.com/terraform/language/backend) для Terraform:  
    а. Рекомендуемый вариант: S3 bucket в созданном ЯО аккаунте(создание бакета через TF)
    б. Альтернативный вариант:  [Terraform Cloud](https://app.terraform.io/)
+   **Ответ:**
+     -  ![Снимок консоли](resources/01.png)
+     -  [main.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/infra/bootstrap/main.tf)
 3. Создайте конфигурацию Terrafrom, используя созданный бакет ранее как бекенд для хранения стейт файла. Конфигурации Terraform для создания сервисного аккаунта и бакета и основной инфраструктуры следует сохранить в разных папках.
 4. Создайте VPC с подсетями в разных зонах доступности.
+   **Ответ:**
+    -  ![Снимок консоли](resources/02.png)
+    -  [main.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/infra/main.tf)
 5. Убедитесь, что теперь вы можете выполнить команды `terraform destroy` и `terraform apply` без дополнительных ручных действий.
 6. В случае использования [Terraform Cloud](https://app.terraform.io/) в качестве [backend](https://developer.hashicorp.com/terraform/language/backend) убедитесь, что применение изменений успешно проходит, используя web-интерфейс Terraform cloud.
 
