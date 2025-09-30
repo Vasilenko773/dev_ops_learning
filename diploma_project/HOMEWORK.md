@@ -71,6 +71,10 @@
   а. С помощью terraform resource для [kubernetes](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/kubernetes_cluster) создать **региональный** мастер kubernetes с размещением нод в разных 3 подсетях      
   б. С помощью terraform resource для [kubernetes node group](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/kubernetes_node_group)
   
+  **ОТВЕТ:**
+    -  ![Снимок консоли](resources/03.png)
+    -  [main.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/infra/modules/k8s/main.tf)
+
 Ожидаемый результат:
 
 1. Работоспособный Kubernetes кластер.
