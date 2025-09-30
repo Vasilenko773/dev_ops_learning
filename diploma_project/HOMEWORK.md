@@ -94,6 +94,12 @@
 2. Альтернативный вариант:  
    а. Используйте любой другой код, главное, чтобы был самостоятельно создан Dockerfile.
 
+  **ОТВЕТ:**
+    -  ![Снимок консоли](resources/04.png)
+    -  [Dockerfile.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/app/Dockerfile)
+    -  [main.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/infra/modules/docker/main.tf)
+
+
 Ожидаемый результат:
 
 1. Git репозиторий с тестовым приложением и Dockerfile.

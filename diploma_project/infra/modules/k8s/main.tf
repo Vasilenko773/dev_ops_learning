@@ -39,24 +39,22 @@ resource "yandex_kubernetes_cluster" "this" {
   release_channel         = "REGULAR"
 }
 
-resource "yandex_kubernetes_node_group" "default" {
+resource "yandex_kubernetes_node_group" "ng_a" {
   cluster_id = yandex_kubernetes_cluster.this.id
-  name       = "default-node-group"
+  name       = "ng-a"
 
   instance_template {
     platform_id = var.node_platform_id
-
     resources {
       cores  = var.node_cores
       memory = var.node_memory
     }
-
     boot_disk {
-      size = 16
+      type = "network-hdd"
+      size = 40
     }
-
     network_interface {
-      subnet_ids = [var.subnet_ids[0]]
+      subnet_ids = [var.subnet_a_id]
       nat        = true
     }
   }
@@ -71,7 +69,77 @@ resource "yandex_kubernetes_node_group" "default" {
 
   allocation_policy {
     location {
-      zone = var.zones[0]
+      zone = "ru-central1-a"
+    }
+  }
+}
+
+resource "yandex_kubernetes_node_group" "ng_b" {
+  cluster_id = yandex_kubernetes_cluster.this.id
+  name       = "ng-b"
+
+  instance_template {
+    platform_id = var.node_platform_id
+    resources {
+      cores  = var.node_cores
+      memory = var.node_memory
+    }
+    boot_disk {
+      type = "network-hdd"
+      size = 40
+    }
+    network_interface {
+      subnet_ids = [var.subnet_b_id]
+      nat        = true
+    }
+  }
+
+  scale_policy {
+    auto_scale {
+      min     = var.node_min_hosts
+      max     = var.node_max_hosts
+      initial = var.node_min_hosts
+    }
+  }
+
+  allocation_policy {
+    location {
+      zone = "ru-central1-b"
+    }
+  }
+}
+
+resource "yandex_kubernetes_node_group" "ng_d" {
+  cluster_id = yandex_kubernetes_cluster.this.id
+  name       = "ng-d"
+
+  instance_template {
+    platform_id = var.node_platform_id
+    resources {
+      cores  = var.node_cores
+      memory = var.node_memory
+    }
+    boot_disk {
+      type = "network-hdd"
+      size = 40
+    }
+    network_interface {
+      subnet_ids = [var.subnet_d_id]
+      nat        = true
+    }
+  }
+
+  scale_policy {
+    auto_scale {
+      min     = var.node_min_hosts
+      max     = var.node_max_hosts
+      initial = var.node_min_hosts
+    }
+  }
+
+  allocation_policy {
+    location {
+      zone = "ru-central1-d"
     }
   }
 }

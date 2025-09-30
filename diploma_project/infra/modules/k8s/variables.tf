@@ -64,3 +64,18 @@ variable "node_service_account_id" {
   type        = string
   description = "ID сервисного аккаунта для нод"
 }
+
+variable "subnet_a_id" {
+  type = string
+  description = "Наименование подсети a"
+}
+
+variable "subnet_b_id" {
+  type = string
+  description = "Наименование подсети b"
+}
+
+variable "subnet_d_id" {
+  type = string
+  description = "Наименование подсети d"
+}
