@@ -24,3 +24,21 @@ resource "helm_release" "kube_prometheus_stack" {
 
   create_namespace = true
 }
+
+resource "helm_release" "java_app" {
+  name       = "java-app"
+  chart      = "${path.module}/../app/.helm"
+  namespace  = "my-app"
+  create_namespace = true
+
+  set = [
+    {
+      name  = "image.repository"
+      value = var.image_repository
+    },
+    {
+      name  = "image.tag"
+      value = var.image_tag
+    }
+  ]
+}
