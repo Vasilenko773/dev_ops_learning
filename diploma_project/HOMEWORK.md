@@ -132,6 +132,11 @@
 4. Http доступ на 80 порту к тестовому приложению.
 5. Atlantis или terraform cloud или ci/cd-terraform
 ---
+
+**ОТВЕТ:**
+-  ![Снимок консоли](resources/07.png)
+-  ![main.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/terraform-deploy/main.tf)
+
 ### Установка и настройка CI/CD
 
 Осталось настроить ci/cd систему для автоматической сборки docker image и деплоя приложения при изменении кода.

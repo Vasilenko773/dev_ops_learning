@@ -42,3 +42,40 @@ resource "helm_release" "java_app" {
     }
   ]
 }
+
+resource "kubernetes_manifest" "grafana_ingress" {
+  manifest = {
+    apiVersion = "networking.k8s.io/v1"
+    kind       = "Ingress"
+    metadata = {
+      name      = "grafana-ingress"
+      namespace = "monitoring"
+      annotations = {
+        "kubernetes.io/ingress.class" = "nginx"
+      }
+    }
+    spec = {
+      ingressClassName = "nginx"
+      rules = [
+        {
+          http = {
+            paths = [
+              {
+                path     = "/"
+                pathType = "Prefix"
+                backend = {
+                  service = {
+                    name = "kube-prometheus-stack-grafana"
+                    port = {
+                      number = 80
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
