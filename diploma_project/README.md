@@ -15,7 +15,5 @@
    - helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --set controller.replicaCount=2 --set controller.nodeSelector."kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."kubernetes\.io/os"=linux
 
 4. Настройка мониторинга:
-   - helm repo add bitnami https://charts.bitnami.com/bitnami
-   - helm repo update
-   - kubectl create namespace monitoring
-   - helm install prometheus bitnami/kube-prometheus -n monitoring
+   - cd /monitoring
+   - terraform apply
