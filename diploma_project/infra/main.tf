@@ -12,8 +12,8 @@ terraform {
     bucket                  = "tf-state-bucket-for-state-storage"
     region                  = "ru-central1"
     key                     = "terraform.tfstate"
-    shared_credentials_file = "~/.terraform/credential.txt"
-    profile                 = "terraform"
+#    shared_credentials_file = "~/.terraform/credential.txt"
+#    profile                 = "terraform"
     endpoints               = {
       s3 = "https://storage.yandexcloud.net"
     }
