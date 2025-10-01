@@ -134,8 +134,10 @@
 ---
 
 **ОТВЕТ:**
--  ![Снимок консоли](resources/07.png)
--  ![main.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/terraform-deploy/main.tf)
+  -  ![Снимок консоли](resources/07.png)
+  -  ![main.tf](https://github.com/Vasilenko773/dev_ops_learning/blob/main/diploma_project/terraform-deploy/main.tf)
+  -  ![pipeline](https://github.com/Vasilenko773/dev_ops_learning/actions/runs/18175014242)
+  -  ![Снимок pipeline](resources/08.png)
 
 ### Установка и настройка CI/CD
 
