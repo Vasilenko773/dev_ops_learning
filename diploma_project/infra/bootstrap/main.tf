@@ -1,24 +1,39 @@
+variable "create_sa" {
+  type    = bool
+  default = true
+}
+
+variable "create_bucket" {
+  type    = bool
+  default = true
+}
+
+# Сервисный аккаунт (создаётся только если create_sa = true)
 resource "yandex_iam_service_account" "k8s-service-account" {
+  count       = var.create_sa ? 1 : 0
   name        = "terraform-sa"
   description = "Сервисный аккаунт для Terraform"
 }
 
-# даем доступ к папке для создания всех ресурсов
+# Даем доступ к папке (создаётся только если SA создан)
 resource "yandex_resourcemanager_folder_iam_member" "editor" {
+  count     = var.create_sa ? 1 : 0
   folder_id = var.folder_id
   role      = "editor"
-  member    = "serviceAccount:${yandex_iam_service_account.k8s-service-account.id}"
+  member    = "serviceAccount:${yandex_iam_service_account.k8s-service-account[0].id}"
 }
 
-# создаем ключ сервисного аккаунта
-resource "yandex_iam_service_account_key" "sa-key" {
-  service_account_id = yandex_iam_service_account.k8s-service-account.id
+# Ключ сервисного аккаунта (создаётся только если SA создан)
+resource "yandex_iam_service_account_key" "sa_key" {
+  count              = var.create_sa ? 1 : 0
+  service_account_id = yandex_iam_service_account.k8s-service-account[0].id
   description        = "Создает ключ доступа у сервисного аккаунта"
 }
 
-# бакет для последующего хранения state в s3
+# Бакет S3 для state (создаётся только если create_bucket = true)
 resource "yandex_storage_bucket" "tf_state_bucket" {
-  bucket = "tf-state-bucket-for-state-storage"
+  count     = var.create_bucket ? 1 : 0
+  bucket    = "tf-state-bucket-for-state-storage"
   folder_id = var.folder_id
 
   lifecycle {
