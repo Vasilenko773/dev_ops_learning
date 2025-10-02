@@ -14,4 +14,9 @@ public class HelloWorldController {
     public Map<String, Object> getMessage() {
         return Map.of("message", "Hello world!");
     }
+
+    @GetMapping("v1/")
+    public Map<String, Object> getMessageV1() {
+        return Map.of("message", "Hello DevOps world!");
+    }
 }

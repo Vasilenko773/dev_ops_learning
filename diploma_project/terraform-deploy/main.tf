@@ -1,3 +1,18 @@
+terraform {
+  backend "s3" {
+    bucket = "tf-state-bucket-for-state-storage"
+    region = "ru-central1"
+    key    = "terraform-deploy/terraform.tfstate"  # лучше положить в подпапку
+    endpoints = {
+      s3 = "https://storage.yandexcloud.net"
+    }
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_s3_checksum            = true
+  }
+}
+
 provider "kubernetes" {
   config_path = var.path_to_config
 }
@@ -8,10 +23,14 @@ provider "helm" {
   }
 }
 
-
 resource "kubernetes_namespace" "monitoring" {
   metadata {
     name = "monitoring"
+  }
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = all
   }
 }
 
@@ -23,6 +42,11 @@ resource "helm_release" "kube_prometheus_stack" {
   namespace  = "monitoring"
 
   create_namespace = true
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = all
+  }
 }
 
 resource "helm_release" "java_app" {
@@ -44,6 +68,12 @@ resource "helm_release" "java_app" {
 }
 
 resource "kubernetes_manifest" "grafana_ingress" {
+
+  lifecycle {
+    prevent_destroy = true
+    ignore_changes = all
+  }
+
   manifest = {
     apiVersion = "networking.k8s.io/v1"
     kind       = "Ingress"
